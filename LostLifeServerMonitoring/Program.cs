@@ -3,9 +3,6 @@
     Author: Stepan Myasnikov --> tenxdeveloper.
 \**************************************************************************/
 
-using System.Text.Json;
-using LostLifeServerMonitoring.Models;
-
 namespace LostLifeServerMonitoring
 {
     public static class Program
