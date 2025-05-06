@@ -8,15 +8,15 @@ namespace LostLifeServerMonitoring.Models
     [Serializable]
     public class ServerInfo
     {
-        public int Id;
+        public int Id { get; set; }
+
+        public string? Description { get; set; }
+        public string? Name { get; set; }
+        public string? IpAddress { get; set; }
+        public string? Port { get; set; }
         
-        public string? Description;
-        public string? Name;
-        public string? IpAddress;
-        public string? Port;
-        
-        public int CountPeopleInActive;
-        public int MaxCountPeopleInActive;
+        public int CountPeopleInActive { get; set; }
+        public int MaxCountPeopleInActive { get; set; }
 
     }
 }

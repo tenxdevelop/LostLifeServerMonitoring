@@ -24,9 +24,9 @@ namespace LostLifeServerMonitoring.Persistence.CommandProcessor
         public Task<T> Process<T>(ICommand<T> command)
         {
             var commandType = command.GetType();
-            var handler = m_commandHandlers[commandType] as ICommandHandler<ICommand<T>, T>;
+            var handler = m_commandHandlers[commandType];
             
-            return handler.Handle(command);
+            return handler.BaseHandle(command);
         }
     }    
 }

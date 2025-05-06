@@ -3,6 +3,7 @@
     Author: Stepan Myasnikov --> tenxdeveloper.
 \**************************************************************************/
 
+using System.Diagnostics;
 using LostLifeServerMonitoring.Application.Interfaces;
 using LostLifeServerMonitoring.Models;
 
@@ -10,9 +11,9 @@ namespace LostLifeServerMonitoring.Persistence.JsonPrefs.Repositories
 {
     public class ServerInfoJsonPrefs: JsonPrefs<List<ServerInfo>>, IServerInfoRepository
     {
-        private const string FILE_PATH = "JsonPrefs/ServerInfos.json";
+        private const string FILE_PATH = "./JsonPrefs/ServerInfos.json";
         
-        private readonly List<ServerInfo> m_serverInfos;
+        private List<ServerInfo> m_serverInfos;
         
         public ServerInfoJsonPrefs() : base(FILE_PATH)
         {
@@ -36,13 +37,14 @@ namespace LostLifeServerMonitoring.Persistence.JsonPrefs.Repositories
 
             var serverInfo = new ServerInfo()
             {
+                Id = newServerInfoId,
                 IpAddress = ipAddress,
                 Port = port,
                 Name = name,
                 Description = description,
+                CountPeopleInActive = 0,
                 MaxCountPeopleInActive = maxCountPeopleInActive
             };
-            
             m_serverInfos.Add(serverInfo);
             var result = SaveToJson(m_serverInfos);
             
@@ -63,7 +65,8 @@ namespace LostLifeServerMonitoring.Persistence.JsonPrefs.Repositories
 
         private int GetNewId()
         {
-            var lastId = m_serverInfos.Max(serverInfo => serverInfo.Id);
+            
+            var lastId = m_serverInfos.Count();
             return lastId + 1;
         }
     }

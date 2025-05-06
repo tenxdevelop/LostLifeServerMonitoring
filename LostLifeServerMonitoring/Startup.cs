@@ -19,6 +19,10 @@ namespace LostLifeServerMonitoring
             ServicesRegisterer.RegisterServices(services);
             CommandRegisterer.RegisterCommandHandlers(services);
             
+            services.AddControllers();
+            services.AddEndpointsApiExplorer();
+            services.AddSwaggerGen();
+            
             services.AddCors(options =>
             {
                 options.AddPolicy("AllowAll", policy =>
@@ -35,6 +39,9 @@ namespace LostLifeServerMonitoring
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                
+                app.UseSwagger();
+                app.UseSwaggerUI();
             }
             
             app.UseRouting();
