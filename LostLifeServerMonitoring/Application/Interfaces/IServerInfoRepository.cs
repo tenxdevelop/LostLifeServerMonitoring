@@ -11,7 +11,7 @@ namespace LostLifeServerMonitoring.Application.Interfaces
     {
         Task<List<ServerInfo>> GetAllServerInfo();
 
-        Task<bool> GetServerInfoBySocket(string ipAddress, string port);
+        Task<ServerInfo?> GetServerInfoBySocket(string ipAddress, string port);
         
         Task<bool> CreateServerInfo(string ipAddress, string port, string name, string description, int maxCountPeopleInActive);
 
