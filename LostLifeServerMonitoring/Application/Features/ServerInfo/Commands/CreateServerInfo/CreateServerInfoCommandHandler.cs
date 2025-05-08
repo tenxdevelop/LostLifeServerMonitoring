@@ -18,6 +18,11 @@ namespace LostLifeServerMonitoring.Application.Features.ServerInfo.Commands
         
         public async Task<bool> Handle(CmdCreateServerInfo command)
         {
+            var serverInfo = await m_serverInfoRepository.GetServerInfoBySocket(command.IpAddress, command.Port);
+            
+            if (serverInfo is not null)
+                return false;
+            
             var result = await m_serverInfoRepository.CreateServerInfo(command.IpAddress, command.Port, command.Name, command.Description, command.MaxCountPeopleInActive);
             return result;
         }

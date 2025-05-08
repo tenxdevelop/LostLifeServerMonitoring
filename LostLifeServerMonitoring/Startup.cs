@@ -18,6 +18,7 @@ namespace LostLifeServerMonitoring
         {
             ServicesRegisterer.RegisterServices(services);
             CommandRegisterer.RegisterCommandHandlers(services);
+            QueryRegisterer.RegisterQueryHandlers(services);
             
             services.AddControllers();
             services.AddEndpointsApiExplorer();

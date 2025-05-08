@@ -4,6 +4,7 @@
 \**************************************************************************/
 
 using LostLifeServerMonitoring.Application.Features.ServerInfo.Commands;
+using LostLifeServerMonitoring.Application.Features.ServerInfo.Queries;
 using LostLifeServerMonitoring.Controllers.Base;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,6 +13,16 @@ namespace LostLifeServerMonitoring.Controllers
     [Route("api/[controller]/[action]")]
     public class ServerInfoController : BaseController
     {
+
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
+        {
+            var query = new GetAllServerInfoQuery();
+            var serverInfos = await QueryProcessor.Send(query);
+            
+            return Ok(serverInfos);
+        }
+        
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CmdCreateServerInfo command)
         {

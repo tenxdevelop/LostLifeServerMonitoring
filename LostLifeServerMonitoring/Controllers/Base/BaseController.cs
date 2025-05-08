@@ -13,7 +13,9 @@ namespace LostLifeServerMonitoring.Controllers.Base
     public class BaseController : ControllerBase
     {
         protected ICommandProcessor? CommandProcessor => m_commandProcessor ??= HttpContext.RequestServices.GetService<ICommandProcessor>();
+        protected IQueryProcessor? QueryProcessor => m_queryProcessor ??= HttpContext.RequestServices.GetService<IQueryProcessor>();
         
         private ICommandProcessor? m_commandProcessor;
+        private IQueryProcessor? m_queryProcessor;
     }
 }
