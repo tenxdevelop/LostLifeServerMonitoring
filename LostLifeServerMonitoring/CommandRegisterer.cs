@@ -4,6 +4,7 @@
 \**************************************************************************/
 
 using LostLifeServerMonitoring.Application.Features.ServerInfo.Commands;
+using LostLifeServerMonitoring.Application.Features.Player.Commands;
 using LostLifeServerMonitoring.Persistence.CommandProcessor;
 using LostLifeServerMonitoring.Application.Interfaces;
 
@@ -19,6 +20,7 @@ namespace LostLifeServerMonitoring
                 
                 commandProcessor.RegisterHandler(new CreateServerInfoCommandHandler(factory.GetService<IServerInfoRepository>()));
                 commandProcessor.RegisterHandler(new DeleteServerInfoCommandHandler(factory.GetService<IServerInfoRepository>()));
+                commandProcessor.RegisterHandler(new ConnectionPlayerCommandHandler(factory.GetService<IServerInfoRepository>(), factory.GetService<IPlayerRepository>()));
                 
                 return commandProcessor;
             });

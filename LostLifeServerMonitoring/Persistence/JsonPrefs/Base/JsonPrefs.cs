@@ -11,7 +11,9 @@ namespace LostLifeServerMonitoring.Persistence.JsonPrefs
     {
         private readonly string m_filePath;
         private readonly JsonSerializerOptions? m_jsonOptions;
-
+        
+        protected TModel model;
+        
         protected JsonPrefs(string filePath)
         {
             m_filePath = filePath;
@@ -25,6 +27,8 @@ namespace LostLifeServerMonitoring.Persistence.JsonPrefs
             
             if (!File.Exists(m_filePath))
                 File.Create(m_filePath).Close();
+
+            model = LoadFromJson();
         }
 
         public TModel LoadFromJson()
@@ -57,5 +61,6 @@ namespace LostLifeServerMonitoring.Persistence.JsonPrefs
                 return false;
             }
         }
+        
     }
 }

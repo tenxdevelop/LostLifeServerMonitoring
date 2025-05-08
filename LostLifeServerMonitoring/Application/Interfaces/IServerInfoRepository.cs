@@ -16,5 +16,7 @@ namespace LostLifeServerMonitoring.Application.Interfaces
         Task<bool> CreateServerInfo(string ipAddress, string port, string name, string description, int maxCountPeopleInActive);
 
         Task<bool> DeleteServerInfo(ServerInfo serverInfo);
+        
+        Task<bool> UpdateServerInfo(ServerInfo serverInfo);
     }
 }

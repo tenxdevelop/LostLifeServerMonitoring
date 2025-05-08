@@ -13,6 +13,7 @@ namespace LostLifeServerMonitoring
         public static void RegisterServices(IServiceCollection container)
         {
             container.AddSingleton<IServerInfoRepository, ServerInfoJsonPrefs>();
+            container.AddSingleton<IPlayerRepository, PlayerJsonPrefs>();
         }
     }
 }

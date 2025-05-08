@@ -13,21 +13,20 @@ namespace LostLifeServerMonitoring.Persistence.JsonPrefs.Repositories
     {
         private const string FILE_PATH = "./JsonPrefs/ServerInfos.json";
         
-        private List<ServerInfo> m_serverInfos;
-        
         public ServerInfoJsonPrefs() : base(FILE_PATH)
         {
-            m_serverInfos = LoadFromJson();
+            
         }
 
         public Task<List<ServerInfo>> GetAllServerInfo()
         {
-            return Task.FromResult(m_serverInfos);
+            return Task.FromResult(model);
         }
 
         public Task<ServerInfo?> GetServerInfoBySocket(string ipAddress, string port)
         {
-            var serverInfo = m_serverInfos.FirstOrDefault(serverInfo => serverInfo.IpAddress == ipAddress && serverInfo.Port == port);
+            var serverInfo = model.FirstOrDefault(serverInfo => serverInfo.IpAddress == ipAddress && serverInfo.Port == port);
+            
             return Task.FromResult(serverInfo);
         }
 
@@ -45,28 +44,56 @@ namespace LostLifeServerMonitoring.Persistence.JsonPrefs.Repositories
                 CountPeopleInActive = 0,
                 MaxCountPeopleInActive = maxCountPeopleInActive
             };
-            m_serverInfos.Add(serverInfo);
-            var result = SaveToJson(m_serverInfos);
+            
+            var oldStateModel = LoadFromJson();
+            
+            model.Add(serverInfo);
+            
+            var result = SaveToJson(model);
+
+            if (!result)
+            {
+                model = oldStateModel;
+            }
             
             return Task.FromResult(result);
         }
 
         public Task<bool> DeleteServerInfo(ServerInfo serverInfo)
         {
-            if (m_serverInfos.Contains(serverInfo))
+            
+            if (model.Contains(serverInfo))
             {
-                m_serverInfos.Remove(serverInfo);
-                var result = SaveToJson(m_serverInfos);
+                model.Remove(serverInfo);
+                var result = SaveToJson(model);
                 return Task.FromResult(result);
             }
             
             return Task.FromResult(false);
         }
 
+        public Task<bool> UpdateServerInfo(ServerInfo serverInfo)
+        {
+            var oldStateModel = LoadFromJson();
+            var oldServerInfo = oldStateModel.FirstOrDefault(oldServerInfoParam => oldServerInfoParam.Id == serverInfo.Id);
+            
+            if (oldServerInfo is null)
+                return Task.FromResult(false);
+
+            var result = SaveToJson(model);
+            
+            if (!result)
+            {
+                model = oldStateModel;
+            }
+
+            return Task.FromResult(result);
+        }
+
         private int GetNewId()
         {
             
-            var lastId = m_serverInfos.Count();
+            var lastId = model.Count();
             return lastId + 1;
         }
     }

@@ -6,16 +6,8 @@
 namespace LostLifeServerMonitoring.Models
 {
     [Serializable]
-    public class ServerInfo
+    public class Player
     {
         public int Id { get; set; }
-        public string? Description { get; set; }
-        public string? Name { get; set; }
-        public string? IpAddress { get; set; }
-        public string? Port { get; set; }
-        public int CountPeopleInActive { get; set; }
-        public int MaxCountPeopleInActive { get; set; }
-
-        public List<Player> PlayersInActive { get; set; } = new ();
     }
 }
