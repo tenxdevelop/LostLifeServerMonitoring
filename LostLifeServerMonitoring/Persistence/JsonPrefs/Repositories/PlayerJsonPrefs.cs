@@ -43,5 +43,21 @@ namespace LostLifeServerMonitoring.Persistence.JsonPrefs.Repositories
             var player = model.FirstOrDefault(playerParam => playerParam.Id == id);
             return Task.FromResult(player);
         }
+
+        public Task<bool> UpdatePlayer(Player player)
+        {
+            var oldStateModel = LoadFromJson();
+            var oldPlayer = oldStateModel.FirstOrDefault(oldPlayerParam => oldPlayerParam.Id == player.Id);
+            
+            if (oldPlayer is null)
+                Task.FromResult(false);
+
+            var result = SaveToJson(model);
+           
+            if(!result)
+                model = oldStateModel;
+            
+            return Task.FromResult(result);
+        }
     }
 }

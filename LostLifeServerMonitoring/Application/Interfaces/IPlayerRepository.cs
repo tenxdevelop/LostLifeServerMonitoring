@@ -12,5 +12,7 @@ namespace LostLifeServerMonitoring.Application.Interfaces
         Task<bool> CreatePlayer(int id);
 
         Task<Player> GetPlayerById(int id);
+        
+        Task<bool> UpdatePlayer(Player player);
     }
 }

@@ -1,36 +1,36 @@
 [
   {
-    "Id": 1,
+    "Id": 0,
     "Description": "test",
-    "Name": "test",
+    "Name": "test server",
     "IpAddress": "192.168.1.1",
-    "Port": "5564",
-    "CountPeopleInActive": 1,
+    "Port": "4545",
+    "CountPeopleInActive": 2,
     "MaxCountPeopleInActive": 420,
     "PlayersInActive": [
       {
-        "Id": 12
+        "Id": 0,
+        "ServerInfoId": "0"
+      },
+      {
+        "Id": 3,
+        "ServerInfoId": "0"
       }
     ]
   },
   {
     "Id": 2,
     "Description": "test",
-    "Name": "test",
+    "Name": "test server 2",
     "IpAddress": "192.168.2.2",
     "Port": "4545",
-    "CountPeopleInActive": 0,
-    "MaxCountPeopleInActive": 420,
-    "PlayersInActive": []
-  },
-  {
-    "Id": 3,
-    "Description": "test",
-    "Name": "test",
-    "IpAddress": "192.168.1.1",
-    "Port": "5584",
     "CountPeopleInActive": 1,
-    "MaxCountPeopleInActive": 420,
-    "PlayersInActive": []
+    "MaxCountPeopleInActive": 4,
+    "PlayersInActive": [
+      {
+        "Id": 2,
+        "ServerInfoId": "2"
+      }
+    ]
   }
 ]

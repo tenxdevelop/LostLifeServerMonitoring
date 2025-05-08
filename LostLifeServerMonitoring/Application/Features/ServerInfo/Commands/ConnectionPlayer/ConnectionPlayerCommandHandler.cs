@@ -31,6 +31,9 @@ namespace LostLifeServerMonitoring.Application.Features.Player.Commands
                 
                 player = await m_playerRepository.GetPlayerById(command.PlayerId);
             }
+
+            if (!string.IsNullOrEmpty(player.ServerInfoId))
+                return false;
             
             var serverInfo = await m_serverInfoRepository.GetServerInfoBySocket(command.IpAddress, command.Port);
             
@@ -40,10 +43,17 @@ namespace LostLifeServerMonitoring.Application.Features.Player.Commands
             if(serverInfo.CountPeopleInActive >= serverInfo.MaxCountPeopleInActive)
                 return false;
             
+            player.ServerInfoId = serverInfo.Id.ToString();
+            
             serverInfo.PlayersInActive.Add(player);
             serverInfo.CountPeopleInActive = serverInfo.PlayersInActive.Count;
-
+            
             var result = await m_serverInfoRepository.UpdateServerInfo(serverInfo);
+
+            if (result)
+            {
+                result = await m_playerRepository.UpdatePlayer(player);
+            }
             
             return result;
         }

@@ -3,7 +3,6 @@
     Author: Stepan Myasnikov --> tenxdeveloper.
 \**************************************************************************/
 
-using System.Diagnostics;
 using LostLifeServerMonitoring.Application.Interfaces;
 using LostLifeServerMonitoring.Models;
 
@@ -64,8 +63,14 @@ namespace LostLifeServerMonitoring.Persistence.JsonPrefs.Repositories
             
             if (model.Contains(serverInfo))
             {
+                var oldStateModel = LoadFromJson();
+                
                 model.Remove(serverInfo);
                 var result = SaveToJson(model);
+
+                if (!result)
+                    model = oldStateModel;    
+                
                 return Task.FromResult(result);
             }
             
@@ -92,8 +97,10 @@ namespace LostLifeServerMonitoring.Persistence.JsonPrefs.Repositories
 
         private int GetNewId()
         {
+            if (model.Count.Equals(0))
+                return 0;
             
-            var lastId = model.Count();
+            var lastId = model.Max(serverInfo => serverInfo.Id);
             return lastId + 1;
         }
     }
