@@ -18,6 +18,7 @@ namespace LostLifeServerMonitoring
                 var commandProcessor = new CommandProcessor();
                 
                 commandProcessor.RegisterHandler(new CreateServerInfoCommandHandler(factory.GetService<IServerInfoRepository>()));
+                commandProcessor.RegisterHandler(new DeleteServerInfoCommandHandler(factory.GetService<IServerInfoRepository>()));
                 
                 return commandProcessor;
             });
