@@ -21,6 +21,7 @@ namespace LostLifeServerMonitoring
                 commandProcessor.RegisterHandler(new CreateServerInfoCommandHandler(factory.GetService<IServerInfoRepository>()));
                 commandProcessor.RegisterHandler(new DeleteServerInfoCommandHandler(factory.GetService<IServerInfoRepository>(), factory.GetService<IPlayerRepository>()));
                 commandProcessor.RegisterHandler(new ConnectionPlayerCommandHandler(factory.GetService<IServerInfoRepository>(), factory.GetService<IPlayerRepository>()));
+                commandProcessor.RegisterHandler(new DisconnectionPlayerCommandHandler(factory.GetService<IServerInfoRepository>(), factory.GetService<IPlayerRepository>()));
                 
                 return commandProcessor;
             });

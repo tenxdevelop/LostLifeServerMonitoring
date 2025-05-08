@@ -95,6 +95,12 @@ namespace LostLifeServerMonitoring.Persistence.JsonPrefs.Repositories
             return Task.FromResult(result);
         }
 
+        public Task<ServerInfo?> GetServerInfoById(int id)
+        {
+            var serverInfo = model.FirstOrDefault(serverInfo => serverInfo.Id == id);
+            return Task.FromResult(serverInfo);
+        }
+        
         private int GetNewId()
         {
             if (model.Count.Equals(0))

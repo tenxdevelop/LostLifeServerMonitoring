@@ -19,5 +19,13 @@ namespace LostLifeServerMonitoring.Controllers
             
             return Ok(result);
         }
+
+        [HttpPut]
+        public async Task<IActionResult> DisconnectionPlayer([FromBody] CmdDisconnectionPlayer command)
+        {
+            var result = await CommandProcessor?.Process(command)!;
+            
+            return Ok(result);
+        }
     }
 }

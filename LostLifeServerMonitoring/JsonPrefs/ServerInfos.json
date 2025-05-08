@@ -5,11 +5,15 @@
     "Name": "test server",
     "IpAddress": "192.168.1.1",
     "Port": "4545",
-    "CountPeopleInActive": 2,
+    "CountPeopleInActive": 3,
     "MaxCountPeopleInActive": 420,
     "PlayersInActive": [
       {
         "Id": 0,
+        "ServerInfoId": "0"
+      },
+      {
+        "Id": 1,
         "ServerInfoId": "0"
       },
       {
@@ -24,13 +28,8 @@
     "Name": "test server 2",
     "IpAddress": "192.168.2.2",
     "Port": "4545",
-    "CountPeopleInActive": 1,
+    "CountPeopleInActive": 0,
     "MaxCountPeopleInActive": 4,
-    "PlayersInActive": [
-      {
-        "Id": 2,
-        "ServerInfoId": "2"
-      }
-    ]
+    "PlayersInActive": []
   }
 ]
