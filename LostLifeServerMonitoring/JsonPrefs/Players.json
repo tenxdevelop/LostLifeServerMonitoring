@@ -1,7 +1,7 @@
 [
   {
     "Id": 0,
-    "ServerInfoId": "0"
+    "ServerInfoId": ""
   },
   {
     "Id": 1,
@@ -13,6 +13,10 @@
   },
   {
     "Id": 3,
-    "ServerInfoId": "0"
+    "ServerInfoId": ""
+  },
+  {
+    "Id": 10,
+    "ServerInfoId": "2"
   }
 ]
